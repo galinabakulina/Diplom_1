@@ -41,7 +41,7 @@ public class BurgerTest {
     }
 
     @Test
-    public void bunsOnly() {
+    public void testSetBuns() {
         burger.setBuns(myBun);
 
         String expected = "(==== Белая булочка ====)\n" +
@@ -54,7 +54,22 @@ public class BurgerTest {
     }
 
     @Test
-    public void burgerWithMeatOnly() {
+    public void testAddIngredient() {
+        burger.setBuns(myBun);
+        burger.addIngredient(myMeat);
+
+        String expected = "(==== Белая булочка ====)\n" +
+                "= filling Котлетка =\n" +
+                "(==== Белая булочка ====)\n" +
+                "\n" +
+                "Price: 500,000000\n";
+
+        String actual = burger.getReceipt();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRemoveIngredient() {
         burger.setBuns(myBun);
         burger.addIngredient(mySalad);
         burger.addIngredient(myMeat);
@@ -71,7 +86,7 @@ public class BurgerTest {
     }
 
     @Test
-    public void burgerWithSausceSaladAndMeat() {
+    public void testMoveIngredient() {
         burger.setBuns(myBun);
         burger.addIngredient(mySalad);
         burger.addIngredient(myMeat);
