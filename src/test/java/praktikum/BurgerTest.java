@@ -2,18 +2,42 @@ package praktikum;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.*;
+import static praktikum.IngredientType.*;
+
+@RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
     private Burger burger;
-    private final Bun myBun = new Bun("Белая булочка", 100);
-    private final Ingredient mySalad = new Ingredient(IngredientType.FILLING, "Салатик", 75);
-    private final Ingredient myMeat = new Ingredient(IngredientType.FILLING, "Котлетка", 300);
-    private final Ingredient mySauce = new Ingredient(IngredientType.SAUCE, "Сметанка", 25);
+    @Mock
+    private Bun myBun;
+    @Mock
+    private Ingredient mySalad;
+    @Mock
+    private Ingredient myMeat;
+    @Mock
+    private Ingredient myCream;
 
     @Before
     public void setUp() {
         burger = new Burger();
+
+        Mockito.when(myBun.getName()).thenReturn("Белая булочка");
+        Mockito.when(myBun.getPrice()).thenReturn(100f);
+        Mockito.when(mySalad.getName()).thenReturn("Салатик");
+        Mockito.when(mySalad.getPrice()).thenReturn(75f);
+        Mockito.when(mySalad.getType()).thenReturn(FILLING);
+        Mockito.when(myMeat.getName()).thenReturn("Котлетка");
+        Mockito.when(myMeat.getPrice()).thenReturn(300f);
+        Mockito.when(myMeat.getType()).thenReturn(FILLING);
+        Mockito.when(myCream.getName()).thenReturn("Сметанка");
+        Mockito.when(myCream.getPrice()).thenReturn(25f);
+        Mockito.when(myCream.getType()).thenReturn(SAUCE);
+
     }
 
     @Test
@@ -51,7 +75,7 @@ public class BurgerTest {
         burger.setBuns(myBun);
         burger.addIngredient(mySalad);
         burger.addIngredient(myMeat);
-        burger.addIngredient(mySauce);
+        burger.addIngredient(myCream);
         burger.moveIngredient(2,0);
 
         String expected = "(==== Белая булочка ====)\n" +
